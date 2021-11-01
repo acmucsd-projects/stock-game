@@ -1,41 +1,41 @@
-import React, {useRef} from 'react'
-import Stylesheet from './components/Stylesheet'
-import './components/myStyles.css'
-import Inline from './components/Inline'
-import './components/appStyles.css'
-import styles from './components/appStyles.module.css'
+/*
+This is what I have for the login page so far.
+Feel free to make changes on a branch.
+-Ben
+*/
 
+import React, {useRef} from 'react'
+import './components/StyleSheet.css'
 
 function App() { 
 
+  //Create references in JSX code
   const loginRef = useRef()
   const passRef = useRef()
 
+
+  /* 
+  Function that handles the login button
+  */
   function buttonHandler(e){
 
+    //Store values of references
     const loginValue = loginRef.current.value
     const passValue = passRef.current.value
 
-    const heading = {
-      fontSize: '72px',
-      color: 'green'
-  }
-
+    //If there is no input in the fields, do nothing
     if ( (loginValue === '')||(passValue === '') ){
       return
     }
 
-    console.log(loginValue)
-    console.log(passValue)
-
+    //Resets password field to null
     passRef.current.value = null
 
   }
   
   return (
+
     <>
-
-
     <center>
       <header className="App-header">
         <h1 className='font-xl'>Stock Prediction Game</h1>
@@ -47,13 +47,12 @@ function App() {
         <br></br>
         <br></br>
 
+        {/* Login Button that calls buttonHandler() */}
         <button className='button' onClick={buttonHandler}>Login</button>
 
 
       </header>
     </center>
-
-
 
     </>
   )
