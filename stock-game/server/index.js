@@ -1,10 +1,11 @@
 const express = require('express');
+const cors = require('cors');
+const router = require('./api');
 const server = express();
-const router = express.Router();
-router.get('/pokemon',(req, res) => {
-    res.status(200).json({ hello: 'world'})
-});
 
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({extended:true}))
 server.use('/api',router);
 
 server.listen(5000, () => {
