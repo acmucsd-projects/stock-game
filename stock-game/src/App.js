@@ -1,22 +1,18 @@
-/*
-This is what I have for the login page so far.
-Feel free to make changes on a branch.
--Ben
-*/
-
 import './index.css';
-import Login from './components/login.js'
+import Login from './components/login.js';
+import Navbar from './components/navbar.js'
 
 function App() {
+  // Local var to store navbar, which has a prop pages (an array, might be helpful for multiple pages)
+  var navbar = <Navbar pages={[<Login name="login" key="login-page"/>]} />;
+  var pages = navbar.props.pages.map((page) => { 
+    return page; 
+  })
+
   return(
     <>
-      <header className="App-header">
-        <h1>Stock Prediction Game</h1>
-      </header>
-      <div className="page">
-        <Login />
-      </div>
-      
+      {navbar}
+      {pages} 
     </>
   )   
 }

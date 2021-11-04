@@ -1,12 +1,13 @@
-import {useRef, useEffect} from 'react';
 import './login.css';
+import '../index.css';
+import {useRef, useEffect} from 'react';
 
 function Login(props) {
   // Create references in JSX code
   const loginRef = useRef()
   const passRef = useRef()
 
-  // Focus on username input
+  // Hide scroll bar on login page
   useEffect(() => {
     document.body.classList.add("no-scroll")
   }, [])
@@ -28,16 +29,20 @@ function Login(props) {
     // Resets password field to null
     passRef.current.value = null
   }
-  
-  return (
-    <div className="login-container">    
-      <input ref={loginRef} placeholder="Username" type="text"/>
-      <input ref={passRef} placeholder="Password" type="password"/>
 
-      {/* Login Button that calls buttonHandler() */}
-      <button className='button' onClick={buttonHandler}>Login</button>
-    </div>
+  return (
+    <div className="page">
+      <div className="login-container"> 
+      <h1 className="page-title">Login</h1>   
+        <input ref={loginRef} placeholder="Username" type="text"/>
+        <input ref={passRef} placeholder="Password" type="password"/>
+
+        {/* Login Button that calls buttonHandler() */}
+        <button className='button' onClick={buttonHandler}>Login</button>
+      </div>
+    </div>    
   )
+  
 }
 
 export default Login;

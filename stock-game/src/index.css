@@ -35,25 +35,19 @@ body.no-scroll {
   overflow: hidden;
 }
 
-/* Default header from create-react-app */
-.App-header {
-  background-color: var(--black);;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* font-size: calc(5px + 2vmin); */
-  color: white;
-  padding: 2% 10%;
-}
-
 /* Styles for all "page" divs like the ones that will wrap the dashboard, login, profile */
 .page {
   padding: 2% 10%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   height: 100%;
+}
+
+.page-title {
+  flex-basis: 100%;
+  text-align: center;
 }
 
 .button {
@@ -81,5 +75,5 @@ h1, header h1 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 20px;
 }
