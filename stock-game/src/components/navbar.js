@@ -5,7 +5,7 @@ import { useState } from 'react';
 function Navbar(props) {
   // Store page links in local variable to return later  
   var pageLinks = props.pages.map((page) => {
-    return <a key={`${page.props.name}-link`} onClick={navHandler}>{page.props.name}</a>;
+    return <a key={`${page.props.name}-link`}>{page.props.name}</a>;
   })
   // For some reason the console says that each element in 
   // the pageLinks must have a unique key attribute
