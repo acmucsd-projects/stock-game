@@ -32,7 +32,6 @@ function Login() {
     <center>
         
         <header className="App-header">
-        <style type="Page-Default"></style>
         <h1 className='font-xl'>Stock Prediction Game</h1>
         <div>Username: <input ref={loginRef} type="text"/> </div>
         <br></br>

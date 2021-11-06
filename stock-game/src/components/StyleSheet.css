@@ -42,6 +42,21 @@ display: inline-block;
 font-size: 16px;
 }
 
+.box {
+    float : right; 
+    paddingRight : '5px';
+    background-color: #52B788;
+    border-radius: 10px;
+    width: 380px;
+    height: 450px;
+    padding: 28px;
+    margin: 20px;
+}
+
 .font-xl {
     font-size: 50px;
+}
+
+.font-l {
+    font-size: 30px;
 }
