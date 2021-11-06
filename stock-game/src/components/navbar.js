@@ -1,5 +1,4 @@
 import './navbar.css'
-import '../index.css';
 import { useState } from 'react';
 
 function Navbar(props) {
