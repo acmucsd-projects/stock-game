@@ -1,7 +1,13 @@
 const express = require('express');
-
+//const UserService = require('../services/user');
+const User = require('../models/user');
 const router = express.Router();
 
+
+router.get('/user', async (req, res) => {
+    const user = await User.find().exec();
+    res.status(200).json({ user });
+  })
 
 router.get('/pokemon',(req, res) => {
     const pokemon = [
