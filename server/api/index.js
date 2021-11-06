@@ -9,6 +9,21 @@ router.get('/user', async (req, res) => {
     res.status(200).json({ user });
   })
 
+router.post('/user', async (req, res) => {
+    const { user } = req.body;
+    console.log("req.body: " + JSON.stringify(req.body));
+    console.log("user: " + user);
+    const { name, bio } = user
+    console.log(name);
+    if (!name){
+        res.status(400).json({ error: 'Invalid input' });
+    }
+    else {
+        const newUser = await User.create(user);
+        res.status(200).json({ user: newUser });
+    }
+});
+
 router.get('/pokemon',(req, res) => {
     const pokemon = [
         {

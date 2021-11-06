@@ -15,6 +15,7 @@ mongoose.connect(config.DATABASE_URL, {
     useUnifiedTopology: true }).then(()=> {
         console.log('Connected to MongoDB Database')
 })
+console.log(config.DATABASE_URL);
 
 server.listen(config.PORT, () => {
     console.log('Server started on port ' + config.PORT);
