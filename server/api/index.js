@@ -8,20 +8,22 @@ router.get('/user', async (req, res) => {
     const user = await User.find().exec();
     res.status(200).json({ user });
   })
+  //to handle promises either do .then .catch or async await
 
-router.post('/user', async (req, res) => {
-    const { user } = req.body;
-    console.log("req.body: " + JSON.stringify(req.body));
-    console.log("user: " + user);
-    const { name, bio } = user
-    console.log(name);
-    if (!name){
-        res.status(400).json({ error: 'Invalid input' });
+router.post('/createuser', async (req, res) => {
+    console.log('Route WORKING');
+    const { nameValue, bioValue } = req.body;
+    //console.log("req.body: " + JSON.stringify(req.body));
+    //console.log("user: " + user);
+    const user = new User({
+        name: nameValue, bio: bioValue
+    })
+    try{
+        const newUser = await user.save();
+        res.status(200).json({ newUser });
     }
-    else {
-        const newUser = await User.create(user);
-        res.status(200).json({ user: newUser });
-    }
+    catch (err) {console.log(err)}
+    
 });
 
 router.get('/pokemon',(req, res) => {
