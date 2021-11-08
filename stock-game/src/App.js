@@ -10,6 +10,7 @@ import './components/StyleSheet.css'
 import Navbar from './components/navbar'
 import Login from './Login'
 import Profile from './Profile'
+import PostRequest from './PostRequest'
 import {Route, Routes, Link} from "react-router-dom"
 
 function App() { 
@@ -25,6 +26,7 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Login/>}/>
       <Route exact path="/profile" element={<Profile/>}/>
+      <Route exact path='/postrequest' element={<PostRequest/>}/>
     </Routes>
 
     </>

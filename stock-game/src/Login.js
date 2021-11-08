@@ -10,7 +10,7 @@ function Login() {
     /* 
     Function that handles the login button
     */
-    function buttonHandler(e){
+    function buttonHandler(){
 
         //Store values of references
         const loginValue = loginRef.current.value
