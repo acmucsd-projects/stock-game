@@ -1,6 +1,6 @@
 //This is backend team trying to experiment with POST Request but we need to create a front end 
 //file to do so.
-import React, {useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 function PostRequest() {
     const nameRef = useRef()
     const bioRef = useRef()
@@ -18,17 +18,30 @@ function PostRequest() {
         
         //fetch is the req
         //res is the result of the post
-        fetch('/createuser', {
-            method: "post", 
-            headers: {
-                "Content-Type": "application/json"
-            },
-            // for req.body
-            body: JSON.stringify({
-                nameValue,
-                bioValue
-            })
-        })
+        // fetch('/api/createuser', {
+        //     method: "post", 
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     // for req.body
+        //     body: JSON.stringify({
+        //         nameValue,
+        //         bioValue
+        //     })
+        // }).then(res => res.json()).then(data => {
+        //    console.log(data)
+        // }).catch(err => console.log(err))
+            fetch('http://localhost:5000/api/createuser', {
+                method: "post", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                // for req.body
+                body: JSON.stringify({
+                    nameValue,
+                    bioValue
+                })
+            }).then(res => res.json()).then(text => console.log(text))
     }
 
     return (
