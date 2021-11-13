@@ -3,7 +3,7 @@ import Dashboard from './Dashboard';
 import Profile from './Profile';
 import PostRequest from './PostRequest';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
