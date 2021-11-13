@@ -1,34 +1,23 @@
-/*
-This is what I have for the login page so far.
-Feel free to make changes on a branch.
--Ben
-Testing
-*/
-
 import React, {useRef} from 'react'
-import './components/StyleSheet.css'
+import './index.css'
 import Navbar from './components/navbar'
-import Login from './Login'
-import Profile from './Profile'
-import PostRequest from './PostRequest'
-import {Route, Routes, Link} from "react-router-dom"
+import Login from './components/login'
+import Profile from './components/profile'
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 
 function App() { 
   // Local var to store navbar, which has a prop pages (an array, might be helpful for multiple pages)
-  var navbar = <Navbar pages={[<Login name="login" key="login-page"/>]} />;
-  var pages = navbar.props.pages.map((page) => { 
-    return page; 
-  })
+  var navbar = <Navbar pages={[<Login name="login" key="login-page"/>, <Profile name="profile" key="profile-page"/>]} />;
   
   return (
-    <>
-    {navbar}
-    <Routes>
-      <Route exact path="/" element={<Login/>}/>
-      <Route exact path="/profile" element={<Profile/>}/>
-      <Route exact path='/postrequest' element={<PostRequest/>}/>
-    </Routes>
-
+    <>    
+    <Router>
+      {navbar}
+      <Routes>
+        <Route exact path="/" element={<Login/>}/>
+        <Route exact path="/profile" element={<Profile/>}/>
+      </Routes>   
+    </Router>
     </>
   )   
 }

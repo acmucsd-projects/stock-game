@@ -1,0 +1,85 @@
+/*
+  See https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties (under "Using the :root pseudo-class").
+  These properties work like variables in CSS, so we can use var(--black) to specify the hex code every time it's needed.
+  The names are based on the color palette Trevor sent in Discord. I made separate stylesheets for each component to keep
+  things organized (note: both index.css and <componentName>.css are imported for each component). This stylesheet
+  can be used to write global styles (across all components, things like body, headings, whatever else you guys want).
+  - David
+*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+  --blonde: #F0E9B3;
+  --yellow: #E0D267;
+  --pistachio: #99C578;
+  --emerald: #76BE80;
+  --green: #52B788;
+  --black: #282c34;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--black);
+  color: white;
+  min-height: 100vh;
+}
+
+body * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Default header from create-react-app */
+.App-header {
+  background-color: var(--black);;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(5px + 2vmin); */
+  color: white;
+  padding: 2% 10%;
+}
+
+/* Styles for all "page" divs like the ones that will wrap the dashboard, login, profile */
+.page {
+  padding: 2% 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
+}
+
+.button {
+  border-radius: 10px;  
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color .5s ease, transform .5s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgba(82, 183, 136, .8);
+  transform: translateY(-3px);
+}
+
+h1, header h1 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 20px;
+}

@@ -1,21 +1,25 @@
 import './navbar.css'
-import { useState } from 'react';
+import {Link} from "react-router-dom"
+import Login from "./login.js"
+import Profile from "./profile.js"
+import PostRequest from '../PostRequest'
 
+/*
+  Navbar component renders links based on the pages passed as props
+*/
 function Navbar(props) {
   // Store page links in local variable to return later  
   var pageLinks = props.pages.map((page) => {
-    return <a key={`${page.props.name}-link`}>{page.props.name}</a>;
+    return <Link key={`${page.props.name}-link`} to={`/${page.props.name}`}>{page.props.name}</Link>;
   })
-  // For some reason the console says that each element in 
-  // the pageLinks must have a unique key attribute
 
-  return(
+  return(    
     <header>
-      <a href="/">
+      <Link to="/">
         <h1>Stock Prediction Game</h1>
-      </a>
+      </Link>
       {pageLinks}
-    </header>
+    </header>         
   )
 }
 
