@@ -12,7 +12,14 @@ class Dashboard extends React.Component {
                 </Score>
                 </Scoreboard>
                 <Predictions>
-                <div>2</div>
+                <table>
+                    <tr style={{fontSize:'1rem'}}>
+                        <th style={{border:'1px solid black'}}>Name</th>
+                        <th>Prediction Date</th>
+                        <th>Price</th>
+                        <th>Points</th>
+                    </tr>
+                </table>
                 </Predictions>
                 </UpperDiv>
                 <Screener>
