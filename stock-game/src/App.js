@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard';
 import Login from './components/login';
 import Profile from './components/profile';
 import PostRequest from './PostRequest';
