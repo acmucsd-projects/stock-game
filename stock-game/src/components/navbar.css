@@ -1,34 +1,128 @@
 header {
   background-color: var(--black);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
   color: white;
-  padding: 1% 5% 0;
-  background-color: #30353d;
+  padding: 1%;
+  margin: 1% 2%;
+  border-radius: 20px;
+  background-color: rgba(65, 68, 77, .95);
+  top: 3%;
+  position: sticky;
+  z-index: 99;
 }
 
 header a:first-of-type {
   margin-right: auto;
   color: white;  
 }
+
 header h1 {
   margin-top: 0;
   margin-bottom: 0;
+  font-size: 30px;
 }
 
 header a {
   text-decoration: none;
   transition: color .5s ease;
-  padding: 10px;
+  padding: 0 15px;
   font-size: 20px;
   cursor: pointer;
 }
 
-header a:hover {
+header a:not(.button a):hover {
   color: var(--emerald) !important;
 }
 
 header a:visited {
   color: white;
+}
+
+.nav-btns > .button {
+  padding: 10px 15px;
+}
+
+/* Center the Links in the navbar */
+@media (min-width: 1200px) {
+  .nav-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-btns {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 890px) {
+  header {
+    padding: 10px;
+    align-items: flex-end;
+    flex-direction: column;
+    margin: 5%;
+  }
+  header a {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  header a:first-of-type {
+    margin-right: 0;
+  }
+  header h1 {
+    font-size: 18px;    
+  }
+  .nav-btns {
+    display: flex;
+    align-items: center;
+  }
+  .nav-btns > .button {
+    padding: 5px;
+    text-align: center;
+  }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    margin-top: .5em;
+  }
+  .nav-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .nav-top a {
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+  .nav-toggle img {
+    width: 18px;
+    padding: 5px;
+    display: block;
+    transition: opacity .5 ease;
+  }
+  .nav-toggle:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .nav-top {
+    justify-content: center;
+  }  
+}
+
+@media screen and (max-width: 340px) {
+  header h1 {
+    width: min-content;
+  }
 }

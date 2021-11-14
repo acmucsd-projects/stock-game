@@ -7,11 +7,6 @@ function Login(props) {
   const loginRef = useRef()
   const passRef = useRef()
 
-  // Hide scroll bar on login page
-  useEffect(() => {
-    document.body.classList.add("no-scroll")
-  }, [])
-
   /* 
     Function that handles the login button
   */

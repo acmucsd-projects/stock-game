@@ -1,25 +1,65 @@
-import React from 'react';
-import {Nav, NavLink, NavMenu, Bars, NavBtn, NavBtnLink} from './NavbarElements';
+import './navbar.css'
+import {Link} from "react-router-dom"
+import { useState, useEffect } from 'react';
+import bars from '../images/bars.svg'
 
-const NavBar = () => {
-    return (
-        <div>
-            <Nav>
-                <NavLink to="/">
-                    Logo
-                </NavLink>
-                <Bars />
-                <NavMenu>
-                  <NavLink to ="/logout" activeStyle>Logout</NavLink>
-                  <NavLink to ="/leaderboard" activeStyle>LeaderBoard</NavLink>
-                  <NavLink to ="/profile" activeStyle>Profile</NavLink>
-                </NavMenu>
-             <NavBtn>
-                 <NavBtnLink to="/signin">Sign In</NavBtnLink>
-             </NavBtn>
-            </Nav>
-        </div> 
+function Navbar(props) {
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 890);
+  const [showNav, setShowNav] = useState(false);
+  const toggleNav = () => {setShowNav(!showNav)}
+
+  useEffect(() => {
+    window.addEventListener("resize", () => setDesktop(window.innerWidth > 890));
+    return () => window.removeEventListener("resize", () => setDesktop(window.innerWidth > 890));
+  });
+
+  if(isDesktop) {
+    return(   
+      <header>
+        <Link to="/">
+          <h1>Stock Game</h1>
+        </Link>
+        <div className="nav-links">
+          <Link to="/login">Login</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/">Leaderboard</Link>
+        </div>
+        <div className="nav-btns">
+          <button className="button">
+            <Link to="/">Sign Up</Link>
+          </button>
+        </div>
+      </header>             
     )
+  }
+  else {
+    return(
+      <header>
+        <div className="nav-top">
+          <Link to="/">
+            <h1>Stock Game</h1>
+          </Link>               
+          <div className="nav-btns">
+            <button className="button">
+              <Link to="/">Sign Up</Link>
+            </button>
+            <a onClick={toggleNav} className="nav-toggle">
+              <img src={bars}></img>
+            </a>              
+          </div>
+        </div> 
+        {showNav ? (
+          <div className="nav-links">
+            <Link to="/login">Login</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/">Leaderboard</Link>
+          </div>
+        ) : (<></>)
+        }       
+        
+      </header>             
+    )
+  }  
 }
 
-export default NavBar;
+export default Navbar;

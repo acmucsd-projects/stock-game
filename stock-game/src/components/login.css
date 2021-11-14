@@ -30,3 +30,11 @@ input:focus {
   color: white;
   opacity: 1;
 }
+
+@media screen and (max-width: 890px) {
+  input {
+    font-size: 16px;
+    height: 1em;
+    padding: 20px 10px;
+  }
+}

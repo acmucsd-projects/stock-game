@@ -6,8 +6,7 @@ import React from "react";
 function Profile() {
   return(
     <>
-      <header className="App-header">
-        <div style={{float: 'right'}}> 
+      <div className="page" style={{float: 'right'}}> 
         <section className="box">
           <p><u>Overview</u></p>
           <br/>
@@ -15,8 +14,7 @@ function Profile() {
           <p>Today's Change:</p>
           <p>Standing:</p>
         </section>
-        </div>        
-      </header>
+      </div>        
     </>
   )
 }
