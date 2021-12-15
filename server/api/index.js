@@ -1,14 +1,29 @@
 const express = require('express');
 //const UserService = require('../services/user');
-const User = require('../models/user');
-const Prediction = require('../models/prediction')
+const User = require('../models/userMongo');
+const Prediction = require('../models/predictionMongo')
 const router = express.Router();
+const passport = require("passport");
 
+router.get("/auth/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:3000/dashboard');
+  });
 
 router.get('/user', async (req, res) => {
     const user = await User.find().exec();
     res.status(200).json({ user });
   })
+router.get('/prediction', async (req, res) => {
+    const prediction = await Prediction.find().exec();
+    res.status(200).json({ prediction });
+})
   //to handle promises either do .then .catch or async await
 
 router.post('/predictions', async (req, res) => {

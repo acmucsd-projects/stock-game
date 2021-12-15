@@ -25,9 +25,11 @@ function Navbar(props) {
           <Link to="/">Leaderboard</Link>
         </div>
         <div className="nav-btns">
+          <div onClick={() => window.open("http://localhost:5000/api/auth/google")}>
           <button className="button">
-            <Link to="/">Sign Up</Link>
+           Sign Up
           </button>
+          </div>
         </div>
       </header>             
     )
