@@ -4,11 +4,23 @@ const cors = require('cors');
 const router = require('./api');
 const server = express();
 const mongoose = require('mongoose')
+const session = require('express-session');
+const passport = require('passport');
 
 server.use(cors());
-server.use(express.json());
 server.use(express.urlencoded({extended:true}))
+server.use(express.json());
+server.use(session({
+    secret: "Secret.",
+    resave: false,
+    saveUninitialized: false
+  }));
+
+server.use(passport.initialize());
+server.use(passport.session());
+
 server.use('/api',router);
+
 
 mongoose.connect(config.DATABASE_URL, {
     useNewUrlParser: true,
