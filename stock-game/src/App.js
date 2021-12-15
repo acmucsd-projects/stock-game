@@ -16,6 +16,7 @@ function App() {
         {/* <Route path="/logout" component={Logout}/>
         <Route path="/leaderboard" component={Leaderboard}/> */}
         <Route path="/profile" component={Profile}/>
+        <Route path="/postrequest" component={PostRequest}/>
       </Switch>
     </Router>
   );

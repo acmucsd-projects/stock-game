@@ -1,6 +1,7 @@
 const express = require('express');
 //const UserService = require('../services/user');
 const User = require('../models/user');
+const Prediction = require('../models/prediction')
 const router = express.Router();
 
 
@@ -9,6 +10,20 @@ router.get('/user', async (req, res) => {
     res.status(200).json({ user });
   })
   //to handle promises either do .then .catch or async await
+
+router.post('/predictions', async (req, res) => {
+    const { ticker, length, predictedPrice, initialPrice, time} = req.body;
+    //console.log("req.body: " + JSON.stringify(req.body));
+    //console.log("user: " + user);
+    const prediction = new Prediction({
+        ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, time_d: time
+    })
+    try{
+        const newPrediction = await prediction.save();
+        res.status(200).json({ newPrediction });
+    }
+    catch (err) {console.log(err)}   
+});
 
 router.post('/createuser', async (req, res) => {
     console.log('Route WORKING');
@@ -22,8 +37,7 @@ router.post('/createuser', async (req, res) => {
         const newUser = await user.save();
         res.status(200).json({ newUser });
     }
-    catch (err) {console.log(err)}
-    
+    catch (err) {console.log(err)}   
 });
 
 router.get('/pokemon',(req, res) => {
