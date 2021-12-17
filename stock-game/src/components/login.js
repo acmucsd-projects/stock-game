@@ -28,7 +28,7 @@ function Login(props) {
   return (
     <div className="page">
       <div className="login-container"> 
-      <h1 className="page-title">Login</h1>   
+        <h1 className="page-title">Login</h1>   
         <input ref={loginRef} placeholder="Username" type="text"/>
         <input ref={passRef} placeholder="Password" type="password"/>
 

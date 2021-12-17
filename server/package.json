@@ -67,7 +67,6 @@
   "keywords": [],
   "author": "Trevor",
   "license": "MIT",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "stock-game"

@@ -1,6 +1,6 @@
 const express = require('express');
 //const UserService = require('../services/user');
-const User = require('../models/userMongo');
+const User = require('../models/user');
 const Prediction = require('../models/predictionMongo')
 const router = express.Router();
 const passport = require("passport");

@@ -5,8 +5,6 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('../config')
 
-
-
 const UserSchema = new mongoose.Schema({
     username: String,
     name: String,
