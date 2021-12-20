@@ -12,12 +12,15 @@ router.get("/auth/google",
 router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+      req.session.user = req.user;
+      console.log("req.user " + req.session.user);
     // Successful authentication, redirect home.
     res.redirect('http://localhost:3000/dashboard');
   });
 
 router.get('/user', async (req, res) => {
-    const user = await User.find().exec();
+    console.log(req.session.user)
+    const user = await req.session.user
     res.status(200).json({ user });
   })
 router.get('/prediction', async (req, res) => {
