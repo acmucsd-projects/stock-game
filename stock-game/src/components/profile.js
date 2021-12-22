@@ -35,8 +35,8 @@ function Profile() {
                     ticker,
                     length,
                     predictedPrice,
-                    initialPrice
-                    ,time
+                    initialPrice,
+                    time
                 })
             }).then(res => res.text()).then(text => console.log(text))
     }

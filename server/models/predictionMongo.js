@@ -20,6 +20,10 @@ const PredictionSchema = new mongoose.Schema(
         time_d: {
             type: Date,
             required: true
+        },
+        finalPrice_d: { //finalPrice should be calculated when user logs in
+            type: Number,
+            required: false
         }
     }
 )
