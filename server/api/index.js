@@ -15,12 +15,12 @@ router.get('/auth/google/callback',
       req.session.user = req.user;
       console.log("req.user " + req.session.user);
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/dashboard');
+    res.redirect('http://localhost:3000/');
   });
 
 router.get('/user', async (req, res) => {
-    console.log(req.session.user)
-    const user = await req.session.user
+    console.log("/user request made ", req.session.user)
+    const user = req.session.user
     res.status(200).json({ user });
   })
 router.get('/prediction', async (req, res) => {
