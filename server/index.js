@@ -7,7 +7,12 @@ const mongoose = require('mongoose')
 const session = require('express-session');
 const passport = require('passport');
 
-server.use(cors());
+server.use(cors({
+    origin:['http://localhost:3000'],
+    methods:['GET','POST'],
+    credentials: true // enable set cookie
+}));
+
 server.use(express.urlencoded({extended:true}))
 server.use(express.json());
 server.use(session({

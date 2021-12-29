@@ -9,6 +9,8 @@ const UserSchema = new mongoose.Schema({
     username: String,
     name: String,
     googleId: String,
+    picture: String,
+    predictions: []
 })
 
 // add plugins to schema
@@ -38,20 +40,49 @@ passport.use(new GoogleStrategy({
       callbackURL: "http://localhost:5000/api/auth/google/callback",
     },
     function(accessToken, refreshToken, profile, cb) {
-        console.log("Username is " + profile.displayName);
-        console.log("ID is ", profile.id);
+        //console.log(profile);
 
-        // TODO: find user instead of replacing it if user 
-        // already exists
-        const newUser = new User({
-            username: profile.displayName,
-            name: profile.displayName,
-            googleId: profile.id
-        })
+        // find user instead of replacing it if user 
+        // already exists based on googleId
+        User.find({googleId: profile.id})
+            .limit(1)
+            .exec(function(err, user) {
+                // log error
+                if (err) {
+                    console.log("Error finding user");
+                    return cb(err);
+                }
+                // if user not found, create new user
+                if (user.length == 0) {
+                    console.log("User not found, creating new user");
+                    /// create new user
+                    const newUser = new User({
+                        username: profile.displayName,
+                        name: profile.displayName,
+                        googleId: profile.id,
+                        picture: profile._json.picture,
+                        predictions: []
+                    })
 
-        User.findOrCreate(newUser, function (err, user) {
-            return cb(err, user);
-        });
+                    // save user
+                    newUser.save(function(err) {
+                        if (err) {
+                            console.log("Error saving user");
+                            return cb(err);
+                        }
+                    })
+                    
+                    // return new user
+                    console.log("New user created: ", newUser);
+                    return cb(null, newUser);
+
+                // if user found, return existing user
+                } else {
+                    // return index 0 because find returns an array
+                    console.log("User found, using existing user: ", user[0]);
+                    return cb(null, user[0]);   
+                }
+            });
     }
 ));
 
