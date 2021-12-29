@@ -1,9 +1,11 @@
+const axios = require('axios');
 const express = require('express');
 //const UserService = require('../services/user');
 const User = require('../models/user');
 const Prediction = require('../models/predictionMongo')
 const router = express.Router();
 const passport = require("passport");
+var session = ''
 
 router.get("/auth/google",
   passport.authenticate("google", { scope: ["profile"] })
@@ -13,28 +15,42 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
       req.session.user = req.user;
+      session = req.session.user['googleId']
       console.log("req.user " + req.session.user);
     // Successful authentication, redirect home.
     res.redirect('http://localhost:3000/dashboard');
   });
+  //res.send
 
 router.get('/user', async (req, res) => {
-    console.log(req.session.user)
     const user = await req.session.user
     res.status(200).json({ user });
-  })
+})
+
 router.get('/prediction', async (req, res) => {
     const prediction = await Prediction.find().exec();
     res.status(200).json({ prediction });
 })
   //to handle promises either do .then .catch or async await
 
+router.get('/user_predictions', async (req, res) => {
+    var query = { googleId_d:"107550883266360924293" };
+    const predictions = await Prediction.find(query).exec();
+    res.status(200).json({ predictions })
+})
+//got googleId to mongoDb database
+
 router.post('/predictions', async (req, res) => {
-    const { ticker, length, predictedPrice, initialPrice, time} = req.body;
-    //console.log("req.body: " + JSON.stringify(req.body));
-    //console.log("user: " + user);
+    const { ticker, length, predictedPrice, initialPrice, time, googleId} = req.body;
+    // var googleId = ""
+    // await axios.get('http://localhost:5000/api/user').then(res => {
+    //     googleId = res
+    // })
+    console.log('output for backend')
+    console.log(googleId)
     const prediction = new Prediction({
-        ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, time_d: time
+        ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, 
+        time_d: time, googleId_d: session
     })
     try{
         const newPrediction = await prediction.save();

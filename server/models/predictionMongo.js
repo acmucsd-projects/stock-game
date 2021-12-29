@@ -21,6 +21,10 @@ const PredictionSchema = new mongoose.Schema(
             type: Date,
             required: true
         },
+        googleId_d: {
+            type: String,
+            required: true
+        },
         finalPrice_d: { //finalPrice should be calculated when user logs in
             type: Number,
             required: false

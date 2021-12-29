@@ -12,7 +12,7 @@ function Predictions(props) {
 
   async function postPrediction(){
     var initialPrice = 0
-
+    var googleId = ""
     // Store form input values when submit btn clicked
     const ticker = stockTicker.current.value 
     const length = predictionLength.current.value
@@ -29,6 +29,20 @@ function Predictions(props) {
       console.log(error)
     }) 
     console.log("initialPrice: " + initialPrice)
+
+    //data for GET request is empty???
+    await axios.get('http://localhost:5000/api/user').then(response => {
+        googleId = response
+    })
+    console.log('outpuT')
+    console.log(googleId)
+
+    //delete what is underneath later. just testing to see if axios works
+    var test = null
+    await axios.get('http://localhost:5000/api/user_predictions').then(res => 
+        test = res
+      )
+    console.log(test)
 
     // Post form input to the backend (with our API)
     fetch('http://localhost:5000/api/predictions', {
