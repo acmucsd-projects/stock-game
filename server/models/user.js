@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     username: String,
     name: String,
     googleId: String,
+    score: Number,
     picture: String,
     predictions: []
 })
@@ -60,6 +61,7 @@ passport.use(new GoogleStrategy({
                         username: profile.displayName,
                         name: profile.displayName,
                         googleId: profile.id,
+                        score: 0,
                         picture: profile._json.picture,
                         predictions: []
                     })
