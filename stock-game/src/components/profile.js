@@ -1,24 +1,32 @@
 import '../index.css'
 import './profile.css'
-import React, {useState, useEffect, useRef} from "react"
+import React, {useState, useEffect, useRef, useContext} from "react"
 import axios from 'axios'
 import Predictions from './dashboard/predictions'
+import {OnProfile} from '../helper/context'
 
 function Profile() {
   const [listOfPrices, setListOfPrices] = useState([]);
-  const [predictions, setPredictions] = useState([])
+  const [predictions, setPredictions] = useState([{'ticker_d': 'No Predictions', 'predictedPrice_d':'N/A'}])
+  const [user, setUser] = useState(null);
+  const {ProfilePage, setProfilePage} = useContext(OnProfile)
   
-  useEffect(() => {
-    async function getPredictions(){
-      await axios.get('http://localhost:5000/api/user_predictions').then(res => 
+  async function getPredictions(){
+    axios.get('http://localhost:5000/api/user', { withCredentials: true })
+    .then(response => setUser(response.data.user));
+    if (user != null){
+      await axios.get('http://localhost:5000/api/user_predictions', { withCredentials: true })
+      .then(res => 
         setPredictions(res['data']['predictions'])
       )
-      // for(let i = 0; i<predictions.length;i++){
-      //   predictions[i] = [predictions[i]['ticker_d'],predictions[i]['predictedPrice_d']]
-      // }
     }
+    setProfilePage(false)
+  }
+
+  useEffect(() => {
     getPredictions();
   }, []);
+  
   console.log(predictions)
   const stockTicker = useRef()
   const predictionLength = useRef()
@@ -74,9 +82,13 @@ function Profile() {
       <div className="box">
         <h1>Profile Overview</h1>
         <br/>
-        <p>Predictions:{predictions.map((prediction) => <p>{JSON.stringify(prediction['ticker_d'])}: {JSON.stringify(prediction['predictedPrice_d'])}</p>)}</p>
+        <p>Predictions:{predictions.map((prediction) => <p>{JSON.parse(JSON.stringify(prediction['ticker_d']))}: {JSON.parse(JSON.stringify(prediction['predictedPrice_d']))}</p>)}</p>
         <p>Today's Change:</p>
         <p>Standing:</p>
+        {/*trying global state*/}
+        {/*ProfilePage ? getPredictions():null*/}
+        {/*ProfilePage ? <h1>Win</h1> : <h1>L</h1>*/}
+        <button className="button" style={{margin: "1em 0"}} onClick={getPredictions}>Show Predictions</button>
       </div>
       <Predictions/>     
     </div>        

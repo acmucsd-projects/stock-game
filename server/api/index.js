@@ -5,6 +5,7 @@ const User = require('../models/user');
 const Prediction = require('../models/predictionMongo')
 const router = express.Router();
 const passport = require("passport");
+var loggedIn = false
 var session = ''
 
 router.get("/auth/google",
@@ -19,6 +20,7 @@ router.get('/auth/google/callback',
       console.log("req.user " + req.session.user);
     // Successful authentication, redirect home.
     res.redirect('http://localhost:3000/');
+    loggedIn = true
   });
   //res.send
 
@@ -35,7 +37,8 @@ router.get('/prediction', async (req, res) => {
   //to handle promises either do .then .catch or async await
 
 router.get('/user_predictions', async (req, res) => {
-    var query = { googleId_d:"107550883266360924293" };
+    console.log("req.session: ", req.session.user)
+    var query = { googleId_d: String(req.session.user['googleId'])};
     const predictions = await Prediction.find(query).exec();
     res.status(200).json({ predictions })
 })
@@ -47,11 +50,10 @@ router.post('/predictions', async (req, res) => {
     // await axios.get('http://localhost:5000/api/user').then(res => {
     //     googleId = res
     // })
-    console.log('output for backend')
-    console.log(googleId)
+    console.log(typeof(googleId))
     const prediction = new Prediction({
         ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, 
-        time_d: time, googleId_d: session
+        time_d: time, googleId_d: googleId
     })
     try{
         const newPrediction = await prediction.save();

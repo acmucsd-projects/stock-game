@@ -1,17 +1,16 @@
 import './navbar.css'
 import {Link} from "react-router-dom"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import bars from '../images/bars.svg'
 import axios from 'axios'; 
+import {OnProfile} from '../helper/context'
 
 function Navbar(props) {
-
-
-
   const [isDesktop, setDesktop] = useState(window.innerWidth > 890);
   const [showNav, setShowNav] = useState(false);
   const [user, setUser] = useState(null);
   const toggleNav = () => {setShowNav(!showNav)}
+  const {ProfilePage, setProfilePage} = useContext(OnProfile)
 
   useEffect(() => {
     window.addEventListener("resize", () => setDesktop(window.innerWidth > 890));
@@ -60,6 +59,7 @@ function Navbar(props) {
         </div>
         <div className="nav-btns">
           {userLogin()}
+          {/*setProfilePage(true)*/}
         </div>
       </header>             
     )
@@ -73,6 +73,7 @@ function Navbar(props) {
           </Link>               
           <div className="nav-btns">
             {userLogin()}
+            {/*setProfilePage(true)*/}
             <a onClick={toggleNav} className="nav-toggle">
               <img src={bars}></img>
             </a>              

@@ -30,19 +30,11 @@ function Predictions(props) {
     }) 
     console.log("initialPrice: " + initialPrice)
 
-    //data for GET request is empty???
-    await axios.get('http://localhost:5000/api/user').then(response => {
-        googleId = response
+    await axios.get('http://localhost:5000/api/user', { withCredentials: true })
+    .then(response => {
+        googleId = response.data['user']['googleId']
     })
-    console.log('outpuT')
-    console.log(googleId)
-
-    //delete what is underneath later. just testing to see if axios works
-    var test = null
-    await axios.get('http://localhost:5000/api/user_predictions').then(res => 
-        test = res
-      )
-    console.log(test)
+    console.log('Google ID for logged in user is: ' + googleId)
 
     // Post form input to the backend (with our API)
     fetch('http://localhost:5000/api/predictions', {
@@ -56,7 +48,8 @@ function Predictions(props) {
         length,
         predictedPrice,
         initialPrice,
-        time
+        time,
+        googleId
       })
     })
     .then(res => {      
