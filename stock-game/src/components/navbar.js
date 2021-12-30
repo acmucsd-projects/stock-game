@@ -5,9 +5,6 @@ import bars from '../images/bars.svg'
 import axios from 'axios'; 
 
 function Navbar(props) {
-
-
-
   const [isDesktop, setDesktop] = useState(window.innerWidth > 890);
   const [showNav, setShowNav] = useState(false);
   const [user, setUser] = useState(null);
@@ -21,30 +18,31 @@ function Navbar(props) {
 
   // makes a GET request to /user on app load
   useEffect(() => {
-     axios.get('http://localhost:5000/api/user', { withCredentials: true })
+    axios.get('http://localhost:5000/api/user', { withCredentials: true })
     .then(response => setUser(response.data.user));
   }, []);
-
 
   // function that conditionally shows the signup button or user profile info
   function userLogin() {
     console.log(user);
-    // if user is logged in, show user profile info
+    // if user is logged in, show button to sign out
     if (user != null) {
       return (
-        <h2>{"Hi, " + user.name + "!"}</h2 >
+        <a href="http://localhost:5000/api/logout">
+          <button className="button">
+            Sign Out
+          </button>
+        </a>
       )
     }
-
-    return (
-      // else show button to sign up
-      <div onClick={() => window.open("http://localhost:5000/api/auth/google", "_self")}>
-      <button className="button">
-      Sign Up
-      </button>
-      </div>
+    // else show button to sign up
+    return (      
+      <a href="http://localhost:5000/api/auth/google">
+        <button className="button">
+          Sign Up
+        </button>
+      </a>
     )
-
   }
 
   if(isDesktop) {

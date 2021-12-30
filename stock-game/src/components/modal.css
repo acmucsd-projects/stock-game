@@ -1,0 +1,19 @@
+.modal-container {
+  z-index: 99;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: var(--black);
+}
+
+.modal-content {
+  margin: 0 10%;
+}
+
+/* .modal-content > div {
+  height: 100vh;
+} */

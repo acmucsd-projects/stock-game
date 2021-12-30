@@ -6,7 +6,7 @@ const router = express.Router();
 const passport = require("passport");
 
 router.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
+    passport.authenticate("google", { scope: ["profile"] })
 );
 
 router.get('/auth/google/callback', 
@@ -14,20 +14,28 @@ router.get('/auth/google/callback',
   function(req, res) {
       req.session.user = req.user;
       console.log("req.user " + req.session.user);
-    // Successful authentication, redirect home.
+    // Successful authentication, redirect home
     res.redirect('http://localhost:3000/');
-  });
+});
 
+router.get('/logout', async (req, res) => {
+    console.log("/logout request made ", req.session.user)
+    // Log the user out, redirect home
+    req.session.destroy();
+    res.redirect("http://localhost:3000");
+})
+
+// to handle promises either do .then .catch or async await
 router.get('/user', async (req, res) => {
     console.log("/user request made ", req.session.user)
     const user = req.session.user
     res.status(200).json({ user });
-  })
+})
+
 router.get('/prediction', async (req, res) => {
     const prediction = await Prediction.find().exec();
     res.status(200).json({ prediction });
 })
-  //to handle promises either do .then .catch or async await
 
 router.post('/predictions', async (req, res) => {
     const { ticker, length, predictedPrice, initialPrice, time} = req.body;
@@ -58,7 +66,7 @@ router.post('/createuser', async (req, res) => {
     catch (err) {console.log(err)}   
 });
 
-router.get('/pokemon',(req, res) => {
+/* router.get('/pokemon',(req, res) => {
     const pokemon = [
         {
             name: 'Pikachu',
@@ -88,6 +96,6 @@ router.get('/pokemon',(req, res) => {
         }
     ]
     res.status(200).json({pokemon: pokemon})
-});
+}); */
 
 module.exports = router;
