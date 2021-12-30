@@ -16,7 +16,7 @@ function Predictions(props) {
     // Store form input values when submit btn clicked
     const ticker = stockTicker.current.value 
     const length = predictionLength.current.value
-    var time = new Date() 
+    var time = new Date().getTime() 
     const predictedPrice = predictionPrice.current.value
 
     // Get and store current stock price (with TD Ameritrade API)

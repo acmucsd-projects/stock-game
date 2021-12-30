@@ -30,6 +30,7 @@ router.get('/logout', async (req, res) => {
     // Log the user out, redirect home
     req.session.destroy();
     res.redirect("http://localhost:3000");
+    loggedIn = false
 })
 
 // to handle promises either do .then .catch or async await

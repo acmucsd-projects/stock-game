@@ -18,7 +18,7 @@ const PredictionSchema = new mongoose.Schema(
             required: true
         },
         time_d: {
-            type: Date,
+            type: Number,
             required: true
         },
         googleId_d: {
