@@ -9,7 +9,7 @@ var loggedIn = false
 var session = ''
 
 router.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
+    passport.authenticate("google", { scope: ["profile"] })
 );
 
 router.get('/auth/google/callback', 
@@ -18,12 +18,21 @@ router.get('/auth/google/callback',
       req.session.user = req.user;
       session = req.session.user['googleId']
       console.log("req.user " + req.session.user);
-    // Successful authentication, redirect home.
+    // Successful authentication, redirect home
     res.redirect('http://localhost:3000/');
     loggedIn = true
   });
   //res.send
 
+
+router.get('/logout', async (req, res) => {
+    console.log("/logout request made ", req.session.user)
+    // Log the user out, redirect home
+    req.session.destroy();
+    res.redirect("http://localhost:3000");
+})
+
+// to handle promises either do .then .catch or async await
 router.get('/user', async (req, res) => {
     console.log("/user request made ", req.session.user)
     const user = req.session.user
@@ -34,7 +43,6 @@ router.get('/prediction', async (req, res) => {
     const prediction = await Prediction.find().exec();
     res.status(200).json({ prediction });
 })
-  //to handle promises either do .then .catch or async await
 
 router.get('/user_predictions', async (req, res) => {
     console.log("req.session: ", req.session.user)
@@ -77,7 +85,7 @@ router.post('/createuser', async (req, res) => {
     catch (err) {console.log(err)}   
 });
 
-router.get('/pokemon',(req, res) => {
+/* router.get('/pokemon',(req, res) => {
     const pokemon = [
         {
             name: 'Pikachu',
@@ -107,6 +115,6 @@ router.get('/pokemon',(req, res) => {
         }
     ]
     res.status(200).json({pokemon: pokemon})
-});
+}); */
 
 module.exports = router;

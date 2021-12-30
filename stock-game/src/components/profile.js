@@ -20,7 +20,7 @@ function Profile() {
         setPredictions(res['data']['predictions'])
       )
     }
-    setProfilePage(false)
+    //setProfilePage(false)
   }
 
   useEffect(() => {
