@@ -28,7 +28,7 @@ function Predictions(props) {
     .catch(error => {
       console.log(error)
     }) 
-    console.log("initialPrice: " + initialPrice)
+    // console.log("initialPrice: " + initialPrice)
 
     await axios.get('http://localhost:5000/api/user', { withCredentials: true })
     .then(response => {
@@ -61,7 +61,6 @@ function Predictions(props) {
     .then(text => console.log("Posted JSON: " + text))
     .catch(error => console.log(error))
   }
-  console.log("postSuccess: " + postSuccess)
 
   return(
     <div className="dashboard-component predictions"> 

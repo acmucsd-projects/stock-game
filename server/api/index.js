@@ -45,13 +45,20 @@ router.get('/prediction', async (req, res) => {
     res.status(200).json({ prediction });
 })
 
-router.get('/user_predictions', async (req, res) => {
+router.get('/user/predictions', async (req, res) => {
     console.log("req.session: ", req.session.user)
-    var query = { googleId_d: String(req.session.user['googleId'])};
-    const predictions = await Prediction.find(query).exec();
-    res.status(200).json({ predictions })
+    if(req.session.user != null) {
+      var query = { googleId_d: String(req.session.user['googleId'])};
+      const predictions = await Prediction.find(query).exec();
+      res.status(200).json({ predictions })
+    }
+    // If user not logged in, return empty array
+    else {
+      const predictions = []
+      res.status(200).json({ predictions })
+    }    
+    
 })
-//got googleId to mongoDb database
 
 router.post('/predictions', async (req, res) => {
     const { ticker, length, predictedPrice, initialPrice, time, googleId} = req.body;
