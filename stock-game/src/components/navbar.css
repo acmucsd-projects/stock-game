@@ -8,10 +8,13 @@ header {
   padding: 1%;
   margin: 1% 2%;
   border-radius: 20px;
-  background-color: rgba(65, 68, 77, .95);
-  top: 3%;
+  background-color: rgba(65, 68, 77);
+  /* background: linear-gradient(167deg, rgba(138,43,226,1) 36%, rgba(0,221,255,1) 64%); */
+  top: 5%;
   position: sticky;
+  /* position: absolute; */
   z-index: 99;
+  /* float:inherit; */
 }
 
 header a:first-of-type {

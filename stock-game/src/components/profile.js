@@ -3,13 +3,13 @@ import './profile.css'
 import React, {useState, useEffect, useRef, useContext} from "react"
 import axios from 'axios'
 import Predictions from './dashboard/predictions'
-import {OnProfile} from '../helper/context'
+// import {OnProfile} from '../helper/context'
 
 function Profile() {
   const [listOfPrices, setListOfPrices] = useState([]);
   const [predictions, setPredictions] = useState([{'ticker_d': 'No Predictions', 'predictedPrice_d':'N/A', 'time_d':0, 'length_d':''}])
   const [user, setUser] = useState(null);
-  const {ProfilePage, setProfilePage} = useContext(OnProfile)
+  // const {ProfilePage, setProfilePage} = useContext(OnProfile)
   
   async function getPredictions(){
     axios.get('http://localhost:5000/api/user', { withCredentials: true })

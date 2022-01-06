@@ -15,16 +15,27 @@
   --emerald: #76BE80;
   --green: #52B788;
   --black: #282c34;
+  margin:0;
+  padding:0;
 }
-
-body {
+body{
   margin: 0;
+  padding:0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black);
   color: white;
   min-height: 100vh;
+  /* background-image: url("./images/leaderboardm.jpg");
+  background-size:cover; */
+  background: rgb(40,44,52);
+  background: linear-gradient(175deg, rgba(40,44,52,1) 35%, rgba(118,190,128,1) 61%);
+}
+html{
+  margin:0;
+  padding:0;
+  /* overflow: hidden; */
 }
 
 body * {
