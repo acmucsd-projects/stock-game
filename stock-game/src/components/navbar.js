@@ -1,16 +1,14 @@
 import './navbar.css'
 import {Link} from "react-router-dom"
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import bars from '../images/bars.svg'
-import axios from 'axios';
-// import {OnProfile} from '../helper/context'
+import axios from 'axios'; 
 
 function Navbar(props) {
   const [isDesktop, setDesktop] = useState(window.innerWidth > 890);
   const [showNav, setShowNav] = useState(false);
   const [user, setUser] = useState(null);
   const toggleNav = () => {setShowNav(!showNav)}
-  // const {ProfilePage, setProfilePage} = useContext(OnProfile)
 
   useEffect(() => {
     window.addEventListener("resize", () => setDesktop(window.innerWidth > 890));

@@ -96,11 +96,14 @@ h3 {
   p {
     font-size: 12px;
   }
+  h2 {
+    font-size: 16px;
+  }
   h3 {
     font-size: 12px;
   }
   .button {
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
 }

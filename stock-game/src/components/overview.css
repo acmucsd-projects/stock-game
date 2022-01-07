@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+tr {
+  height: 2em;
+  border: 1px solid white;
+}
+
+td {
+  padding: 0 10px;
+}
