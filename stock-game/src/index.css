@@ -30,7 +30,7 @@ body{
   /* background-image: url("./images/leaderboardm.jpg");
   background-size:cover; */
   background: rgb(40,44,52);
-  background: linear-gradient(175deg, rgba(40,44,52,1) 35%, rgba(118,190,128,1) 61%);
+  background: linear-gradient(175deg, rgba(40,44,52,1) 35%, rgba(118,190,128,0.8) 61%);
 }
 html{
   margin:0;
