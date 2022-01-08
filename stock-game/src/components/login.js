@@ -33,10 +33,10 @@ function Login(props) {
         <input ref={passRef} placeholder="Password" type="password"/>
 
         {/* Login Button that calls buttonHandler() */}
-        <div style={{display: "flex"}}>
-          <button className='button' onClick={buttonHandler} style={{marginRight: "10px"}}>Login</button>
+        <div style={{display: "flex", flexDirection:"row",margin:"10px"}}>
+          <button className='button login' onClick={buttonHandler} style={{marginRight: "10px"}}>Login</button>
           <a href="http://localhost:5000/api/auth/google">
-            <button className='button'>With Google</button>
+            <button className='button google'>With Google</button>
           </a>          
         </div>
       </div>

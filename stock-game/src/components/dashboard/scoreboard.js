@@ -19,7 +19,9 @@ function Scoreboard(props) {
           : <></>
         }
       </h1>
-      <h1>Your score: 80,000</h1>
+      <h1 className="scoreheader">Your total score is</h1>
+      {/* This should be a mapping function */}
+      <h1 className="score">80,000</h1>
     </div>
   )
 }

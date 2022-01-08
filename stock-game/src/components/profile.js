@@ -4,8 +4,6 @@ import Predictions from './dashboard/predictions'
 import Overview from './overview'
 
 function Profile() {
-  
-
   return(
     <div className="page"> 
       <div className="box">

@@ -1,4 +1,17 @@
 .scoreboard {
   flex-basis: 40%;
   flex-grow: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreheader{
+  font-size: 30px;
+  padding-top: 20px;
+}
+
+.score{
+  font-size: 100px;
+  color:var(--yellow);
 }

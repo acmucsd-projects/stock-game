@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   max-width: 380px;
+  margin-top: 20px;
 }
 
 input {
@@ -29,6 +30,11 @@ input:focus {
 ::placeholder {
   color: white;
   opacity: 1;
+}
+
+.login{
+  background-color: var(--blonde);
+  color: var(--black);
 }
 
 @media screen and (max-width: 890px) {
