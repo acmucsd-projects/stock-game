@@ -82,7 +82,7 @@ function Navbar(props) {
           <div className="nav-links">
             {/* <Link to="/login">Login</Link> */}
             <Link to="/profile">Profile</Link>
-            <Link to="/">Leaderboard</Link>
+            <Link to="/leaderboard">Leaderboard</Link>
           </div>
         ) : (<></>)
         }       
