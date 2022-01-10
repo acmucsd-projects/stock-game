@@ -39,7 +39,7 @@ function Navbar(props) {
     return (      
       <a href="http://localhost:5000/api/auth/google">
         <button className="button">
-          Sign Up
+          Sign In with Google
         </button>
       </a>
     )
@@ -49,10 +49,10 @@ function Navbar(props) {
     return(   
       <header>
         <Link to="/">
-          <h1>Stock Game</h1>
+          <h1>Predict Perfect</h1>
         </Link>
         <div className="nav-links">
-          <Link to="/login">Login</Link>
+          {/* <Link to="/login">Login</Link> */}
           <Link to="/profile">Profile</Link>
           <Link to="/leaderboard">Leaderboard</Link>
         </div>
@@ -80,7 +80,7 @@ function Navbar(props) {
         </div> 
         {showNav ? (
           <div className="nav-links">
-            <Link to="/login">Login</Link>
+            {/* <Link to="/login">Login</Link> */}
             <Link to="/profile">Profile</Link>
             <Link to="/">Leaderboard</Link>
           </div>
