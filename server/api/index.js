@@ -18,7 +18,6 @@ router.get('/auth/google/callback',
   function(req, res) {
       req.session.user = req.user;
       session = req.session.user['googleId']
-      console.log("req.user " + req.session.user);
     // Successful authentication, redirect home
     res.redirect('http://localhost:3000/');
     loggedIn = true
@@ -27,7 +26,7 @@ router.get('/auth/google/callback',
 
 
 router.get('/logout', async (req, res) => {
-    console.log("/logout request made ", req.session.user)
+    console.log("/logout request made ")
     // Log the user out, redirect home
     req.session.destroy();
     res.redirect("http://localhost:3000");
@@ -36,12 +35,13 @@ router.get('/logout', async (req, res) => {
 
 // to handle promises either do .then .catch or async await
 router.get('/user', async (req, res) => {
-    console.log("/user request made ", req.session.user)
+    console.log("/user request made ")
     const user = req.session.user
     res.status(200).json({ user });
 })
 
 router.get('/prediction', async (req, res) => {
+    console.log("/prediction request made")
     const prediction = await Prediction.find().exec();
     res.status(200).json({ prediction });
 })
@@ -129,16 +129,37 @@ router.post('/predictions', async (req, res) => {
     // await axios.get('http://localhost:5000/api/user').then(res => {
     //     googleId = res
     // })
-    console.log(typeof(googleId))
-    const prediction = new Prediction({
-        ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, 
-        time_d: time, googleId_d: googleId
+
+    console.log("/predictions request made ")
+
+    // check if ticker is valid by making a request to the API
+    var tdResponse = {};
+    await axios.get('https://api.tdameritrade.com/v1/marketdata/quotes?apikey=LMDASP6A1ADRYUA6YMIEWWCI7GEFTOFL&symbol=' + ticker)
+    .then(response => {
+      tdResponse =  response.data
+      //console.log (tdResponse.length)
     })
-    try{
-        const newPrediction = await prediction.save();
-        res.status(200).json({ newPrediction });
-    }
-    catch (err) {console.log(err)}   
+
+    // if ticker is invalid, return error
+    if (Object.keys(tdResponse).length === 0) {
+        try{
+            console.log("Ticker not valid")
+            res.status(406).json({ error: "Invalid Ticker" });
+        } catch {
+            console.log("Error sending invalid ticker error ", err)
+        }
+    } else {
+
+        const prediction = new Prediction({
+            ticker_d: ticker, length_d:length, predictedPrice_d:predictedPrice, initialPrice_d: initialPrice, 
+            time_d: time, googleId_d: googleId
+        })
+        try{
+            const newPrediction = await prediction.save();
+            res.status(200).json({ newPrediction });
+        }
+        catch (err) {console.log(err)}  
+    } 
 });
 
 //Deprecated

@@ -13,3 +13,9 @@
   color: var(--green);
   margin-left: 30px;
 }
+.error-msg {
+  display: inline-block;
+  width: fit-content;
+  color: red;
+  margin-left: 30px;
+}

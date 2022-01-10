@@ -5,7 +5,8 @@ import axios from 'axios';
 
 function Predictions(props) {
   // const [listOfPrices, setListOfPrices] = useState([]);
-  const [postSuccess, setPostSuccess] = useState(false);
+  const [postMessage, setPostMessage] = useState("");
+  const [predictionSuccess, setPredictionSuccess] = useState(false);
   const stockTicker = useRef()
   const predictionLength = useRef()
   const predictionPrice = useRef()
@@ -54,12 +55,26 @@ function Predictions(props) {
     })
     .then(res => {      
       if(res.ok) {        
-        setPostSuccess(true) 
+        setPostMessage("Success") 
+        setPredictionSuccess(true)
         return res.text()
-      } 
+      } else {
+          setPredictionSuccess(false)
+          console.log("STATUS: " + res.status)
+          if(res.status === 406) {
+            setPostMessage("Invalid Stock Symbol")
+          } else {
+            setPostMessage("Error")
+          }
+        return res.text()
+      }
     })
     .then(text => console.log("Posted JSON: " + text))
-    .catch(error => console.log(error))
+    .catch(error => {
+      setPredictionSuccess(false)
+      setPostMessage("Error")
+      console.log(error)
+    })
   }
 
   return(
@@ -72,10 +87,7 @@ function Predictions(props) {
       <h3>Predicted Stock Price (USD)</h3>
       <input ref={predictionPrice} type="number"/>
       <button className="button" style={{margin: "1em 0"}} onClick={postPrediction}>Submit</button>
-        {postSuccess
-          ? <h3 className="success-msg">Success!</h3>
-          : <></>
-        }     
+        <h3 className={predictionSuccess ? "success-msg" : "error-msg"}>{postMessage}</h3>     
       {/* <p>{listOfPrices}</p> */}
     </div>
   )
