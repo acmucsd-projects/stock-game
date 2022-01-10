@@ -7,10 +7,13 @@ table {
 }
 
 tr {
-  height: 2em;
+  height: 4em;
   border: 1px solid white;
+  line-height: 4em;
 }
 
 td {
-  padding: 0 10px;
+  padding: 0 0px;
+  height: 4em;
+  line-height: 1px;
 }

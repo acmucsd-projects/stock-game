@@ -14,11 +14,9 @@
 .data{
     width:1400px;
     height: 600px;
-    border:1px solid black;
-    background-color: antiquewhite;
-    margin:10px;
+    background-color: #383D3B;
     border-radius: 20px;
-    opacity:0.5;
+    opacity:0.99;
     overflow:auto;
 }
 

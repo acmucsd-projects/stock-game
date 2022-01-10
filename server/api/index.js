@@ -5,6 +5,7 @@ const User = require('../models/user');
 const Prediction = require('../models/predictionMongo')
 const router = express.Router();
 const passport = require("passport");
+const { findOneAndUpdate } = require('../models/user');
 var loggedIn = false
 var session = ''
 
@@ -59,7 +60,23 @@ router.get('/user/predictions', async (req, res) => {
         const predictions = []
         res.status(200).json({ predictions })
     }    
+})
+
+router.get('/scores', async (req, res) => {
+    console.log("/scores request made ")
+    // find the first 100 users and their scores
+    const scores = await User.find({}, { username: 1, score: 1})
+    .limit(100)
+    .exec();
+
+    // sort scores from highest to lowest
+    // if b score is greater than a, returns a
+    // number greater than 1 meaning b takes precedence
+    // vice versa
+    scores.sort((a, b) => b.score - a.score);
     
+    console.log("scores found ", scores)
+    res.status(200).json({ scores })
 })
 
 router.post('/remove_prediction', async (req, res) => {
@@ -124,20 +141,21 @@ router.post('/predictions', async (req, res) => {
     catch (err) {console.log(err)}   
 });
 
-router.post('/createuser', async (req, res) => {
-    console.log('Route WORKING');
-    const { nameValue, bioValue } = req.body;
-    //console.log("req.body: " + JSON.stringify(req.body));
-    //console.log("user: " + user);
-    const user = new User({
-        name: nameValue, bio: bioValue
-    })
-    try{
-        const newUser = await user.save();
-        res.status(200).json({ newUser });
-    }
-    catch (err) {console.log(err)}   
-});
+//Deprecated
+// router.post('/createuser', async (req, res) => {
+//     console.log('Route WORKING');
+//     const { nameValue, bioValue } = req.body;
+//     //console.log("req.body: " + JSON.stringify(req.body));
+//     //console.log("user: " + user);
+//     const user = new User({
+//         name: nameValue, bio: bioValue
+//     })
+//     try{
+//         const newUser = await user.save();
+//         res.status(200).json({ newUser });
+//     }
+//     catch (err) {console.log(err)}   
+// });
 
 /* router.get('/pokemon',(req, res) => {
     const pokemon = [
