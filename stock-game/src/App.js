@@ -7,18 +7,18 @@ import Leaderboard from './components/Leaderboard';
 import Navbar from './components/navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+
 function App() {
   return (
     <Router>
-      <Navbar/>
-      <Switch>
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/login" component={Login} />
-        {/* <Route path="/logout" component={Logout}/> */}
-        <Route path="/leaderboard" component={Leaderboard}/>
-        <Route path="/profile" component={Profile}/>
-        {/* <Route path="/postrequest" component={PostRequest}/> */}
-      </Switch>
+        <Navbar/>
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          {/* <Route path="/logout" component={Logout}/> */}
+          <Route path="/leaderboard" component={Leaderboard}/>
+          <Route path="/profile" component={Profile}/>    
+          {/* <Route path="/postrequest" component={PostRequest}/> */}
+        </Switch>
     </Router>
   );
 }

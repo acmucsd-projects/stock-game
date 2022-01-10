@@ -4,13 +4,15 @@ import Scoreboard from "./dashboard/scoreboard"
 import Predictions from "./dashboard/predictions"
 import Screener from "./dashboard/screener"
 import {useRef, useEffect} from 'react';
-
+import UserContext from './UserContext/UserContext';
 function Dashboard(props) {
   return(
     <div className="page">
-      <Scoreboard/>
+      <UserContext.Consumer>
+        {user => (<Scoreboard user={user} />)}
+      </UserContext.Consumer>
       <Predictions/>
-      <Screener/>
+      {/* <Screener/> */}
     </div>
   )
 }
