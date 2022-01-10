@@ -223,7 +223,7 @@ function Overview() {
           {predictions.map((prediction) => 
             <>            
               <tr>
-                <td style={{color: "var(--yellow)"}}>{JSON.parse(JSON.stringify(prediction['ticker_d']))}</td>
+                <td key={prediction} style={{color: "var(--yellow)"}}>{JSON.parse(JSON.stringify(prediction['ticker_d']))}</td>
                 <td>{JSON.parse(JSON.stringify(prediction['predictedPrice_d']))}</td>
                 {/* TD Ameritrade is giving me an error (400) when I make a request from getPrice()? */}
                 {/* <td>{getPrice(JSON.stringify(prediction['ticker_d']))}</td> */}
