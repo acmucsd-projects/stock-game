@@ -46,18 +46,64 @@ router.get('/prediction', async (req, res) => {
 })
 
 router.get('/user/predictions', async (req, res) => {
-    console.log("req.session: ", req.session.user)
+    console.log("/user/predictions request made ")
     if(req.session.user != null) {
-      var query = { googleId_d: String(req.session.user['googleId'])};
-      const predictions = await Prediction.find(query).exec();
-      res.status(200).json({ predictions })
+        var query = { googleId_d: String(req.session.user['googleId'])};
+        const predictions = await Prediction.find(query).exec();
+        console.log("Predictions Found ", predictions)
+        res.status(200).json({ predictions })
     }
     // If user not logged in, return empty array
     else {
-      const predictions = []
-      res.status(200).json({ predictions })
+        console.log("User not logged in")
+        const predictions = []
+        res.status(200).json({ predictions })
     }    
     
+})
+
+router.post('/remove_prediction', async (req, res) => {
+    const {ticker, length, predictedPrice, initialPrice, googleId, time} = req.body; //r for remove
+    console.log('REMOVE')
+    console.log(ticker, length, predictedPrice, initialPrice, googleId)
+    const prediction = await Prediction.deleteOne(
+        {
+            'ticker_d': ticker, //d for database
+            'length_d': length,
+            'predictedPrice_d': predictedPrice,
+            'initialPrice_d': initialPrice,
+            'googleId_d':googleId,
+            'time_d':time
+        }
+    )
+    res.status(200).json({ prediction });
+})
+
+router.post('/update_userscore', async (req, res) => {
+    const {length,predictedPrice,initialPrice,googleId,endPrice} = req.body; //r for remove
+    console.log(length,predictedPrice,initialPrice,googleId,endPrice)
+    console.log('TESTT')
+    console.log("initalPrice", initialPrice)
+    console.log("endPrice", endPrice) 
+    console.log("Part 1 ", 1/((Math.abs(endPrice - predictedPrice)/endPrice)))
+    console.log("Part 2 ", (Math.log(length+2) / Math.log(7))+0.3)
+    console.log("Final Score ", Number((1/(Math.abs(endPrice-initialPrice)/endPrice))*
+    ((Math.log(length+2) / Math.log(7))+0.3)))
+    console.log(Number((1/(Math.abs(endPrice-predictedPrice)/endPrice))*
+    ((Math.log(length+2) / Math.log(7))+0.3)))
+    console.log(googleId)
+    const user = await User.updateOne(
+        {
+            'googleId':googleId
+        },
+        {
+            $inc:{
+                score:Number((1/(Math.abs(endPrice-predictedPrice)/endPrice))*
+                ((Math.log(length+2) / Math.log(7))+0.3))
+            }
+        }
+    )
+    res.status(200).json({ user });
 })
 
 router.post('/predictions', async (req, res) => {
